@@ -55,9 +55,10 @@ class TwitterService: SocialNetworkService {
 			return nil
 		}
 		let messages = statusData.map { (status) -> SocialNetworkMessage in
-			let author = status["user"]["screen_name"].string ?? ""
+			let author = status["user"]["screen_name"].string
 			let message = status["text"].string ?? ""
-			let image = URL(string: status["user"]["profile_image_url_https"].string ?? "")
+			let profileImageURL = status["user"]["profile_image_url_https"].string
+			let image = profileImageURL != nil ? URL(string: profileImageURL ?? "") : nil
 			return SocialNetworkMessage(author: author, message: message, image: image)
 		}
 		return messages
