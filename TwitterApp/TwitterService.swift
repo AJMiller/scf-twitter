@@ -8,6 +8,7 @@
 
 import Foundation
 import TwitterKit
+import SwiftyJSON
 
 class TwitterService: SocialNetworkService {
 	var client: TWTRAPIClient
@@ -16,7 +17,7 @@ class TwitterService: SocialNetworkService {
 		self.client = client ?? TWTRAPIClient()
 	}
 
-	func getMostRecentMessages() {
+	func getMostRecentMessages(dataCallback: @escaping (_ messages: [SocialNetworkMessage]?, _ error: Error?) -> ()) {
 		let statusesShowEndpoint = "https://api.twitter.com/1.1/search/tweets.json"
 		let params = ["q": "seeclickfix.com"]
 		var clientError : NSError?
@@ -27,13 +28,38 @@ class TwitterService: SocialNetworkService {
 			if connectionError != nil {
 				print("Error: \(connectionError)")
 			}
+			guard data != nil else {
+				return
+			}
 
 			do {
-				let json = try JSONSerialization.jsonObject(with: data!, options: [])
-				print("json: \(json)")
+				DispatchQueue.global(qos: .userInitiated).async {
+					let messages = self.transformJSONIntoMessages(jsonData: data)
+					// Bounce back to the main thread to update the UI
+					DispatchQueue.main.async {
+    				dataCallback(messages, nil)
+					}
+				}
 			} catch let jsonError as NSError {
 				print("json error: \(jsonError.localizedDescription)")
+				dataCallback(nil, jsonError)
 			}
 		}
+	}
+	func transformJSONIntoMessages(jsonData: Any?) -> [SocialNetworkMessage]? {
+		guard let data = jsonData else {
+			return nil
+		}
+		let json = JSON(data)
+		guard let statusData = json["statuses"].array else {
+			return nil
+		}
+		let messages = statusData.map { (status) -> SocialNetworkMessage in
+			let author = status["user"]["screen_name"].string ?? ""
+			let message = status["text"].string ?? ""
+			let image = URL(string: status["user"]["profile_image_url_https"].string ?? "")
+			return SocialNetworkMessage(author: author, message: message, image: image)
+		}
+		return messages
 	}
 }

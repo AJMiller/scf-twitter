@@ -14,7 +14,13 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		let twitterService = TwitterService(client: nil)
-		twitterService.getMostRecentMessages()
+		twitterService.getMostRecentMessages { (messages, error) in
+			guard error == nil else {
+				print(error)
+				return
+			}
+			print(messages ?? "no messages found")
+		}
 	}
 
 	override func didReceiveMemoryWarning() {
