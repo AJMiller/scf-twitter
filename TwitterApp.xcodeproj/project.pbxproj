@@ -141,6 +141,7 @@
 				3A0DBC111E5680C60015465C /* Resources */,
 				77F486330E85B8C410EB3E24 /* [CP] Embed Pods Frameworks */,
 				4DE2B4B64F97B104CEC1A1C2 /* [CP] Copy Pods Resources */,
+				3A96ED451E56860B00A63E94 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -249,6 +250,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TwitterAppTests/Pods-TwitterAppTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		3A96ED451E56860B00A63E94 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 1e84c9f7e8c6ce96cb4939dbf9752889af86b27a a7c6b9b935f4bd1d712c849a760b50c052ea939d33d46a963022634b24dbf89f";
 		};
 		4DE2B4B64F97B104CEC1A1C2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

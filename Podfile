@@ -6,6 +6,8 @@ target 'TwitterApp' do
   use_frameworks!
 
   # Pods for TwitterApp
+	pod 'Fabric'
+	pod 'TwitterKit'
 
   target 'TwitterAppTests' do
     inherit! :search_paths
