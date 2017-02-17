@@ -8,6 +8,7 @@ target 'TwitterApp' do
   # Pods for TwitterApp
 	pod 'Fabric'
 	pod 'TwitterKit'
+	pod 'SwiftyJSON'
 
   target 'TwitterAppTests' do
     inherit! :search_paths

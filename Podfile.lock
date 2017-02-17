@@ -1,5 +1,6 @@
 PODS:
   - Fabric (1.6.11)
+  - SwiftyJSON (3.1.4)
   - TwitterCore (2.8.0):
     - Fabric
   - TwitterKit (2.8.0):
@@ -7,13 +8,15 @@ PODS:
 
 DEPENDENCIES:
   - Fabric
+  - SwiftyJSON
   - TwitterKit
 
 SPEC CHECKSUMS:
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: f7b0a1adcb800f6446ff0ef70164797376522ff3
 
-PODFILE CHECKSUM: 5630f9c875b1e23ace08bbdc8aa7806c45967a84
+PODFILE CHECKSUM: 59b2238b40cb97f5185701de82ce6b4b066e0236
 
 COCOAPODS: 1.2.0
